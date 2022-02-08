@@ -5,6 +5,7 @@ import { getDevicesData } from './api'
 import Header from './components/Header/Header';
 import List from './components/List/List';
 import Map from './components/Map/Map';
+import Chart from './components/Chart/Chart';
 
 function App() {
     const [devices, setDevices] = useState([]);
@@ -28,6 +29,11 @@ function App() {
                 <Grid item xs={12} md={8}>
                     <Map devices={devices} />
                 </Grid >
+            </Grid>
+            <Grid container spacing={3} style={{ width: '100%', height: '50%' }}>
+                <Grid item xs={12} md={12}>
+                    <Chart />
+                </Grid>
             </Grid>
         </>
     );
