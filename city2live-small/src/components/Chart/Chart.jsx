@@ -15,10 +15,11 @@ function Chart() {
         <div>
             <Line
                 data = {{
-                    labels: dates,
+                    labels: [],
                     datasets: [{
                         label: 'Last 6 days avg temperature: sensor_1',
-                        data: [5, 8, 10, 6, 0, -4, 3],
+                        //data: [5, 8, 10, 6, 0, -4, 3],
+                        data: [],
                         fill: false,
                         borderColor: 'rgb(75, 192, 192)',
                         tension: 0.1
