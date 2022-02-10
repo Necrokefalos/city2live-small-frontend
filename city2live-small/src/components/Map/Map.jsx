@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
     GoogleMap,
     useLoadScript,
+    LoadScript,
     Marker,
     InfoWindow,
 } from '@react-google-maps/api';
 
+import Spiderfy from '../Spiderfy/Spiderfy';
 import mapStyles from './mapStyles';
 
 
@@ -24,35 +26,66 @@ const options = {
 };
 
 function Map({ devices }) {
-    //const [childClicked, setChildClicked] = useState(null);
+    const [map, setMap] = React.useState(null);
+    const onUnmount = React.useCallback(function callback(map) {
+        setMap(null);
+    }, []);
 
+    const [markerClicked, setMarkerClicked] = useState(null);
+    /*
     const { isLoaded, loadError} = useLoadScript({
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_API_KEY,
     });
 
     if (loadError) return 'Error loading maps';
     if (!isLoaded) return 'Loading Maps';
-
+    */
     return (
-        <div>
+        <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_API_KEY}>
             <GoogleMap
                 mapContainerStyle={mapContainerStyle}
                 zoom={12}
                 center={center}
                 options={options}
+                onUnmount={onUnmount}
             >
-                {devices?.map((device, i) => (
-                    <Marker
-                        key={i}
+                <Spiderfy>
+                    {devices?.map((device, i) => (
+                        <Marker
+                            key={i}
+                            position={{
+                                lat: device.location.value.coordinates[1],
+                                lng: device.location.value.coordinates[0],
+                            }}
+                            icon={{
+                                url: '/environementWeatherSensor.png',
+                                anchor: new window.google.maps.Point(15, 0),
+                            }}
+                            onClick={() => {
+                                setMarkerClicked(device);
+                            }}
+                            title={device.id}
+                        />
+                    ))}
+                </Spiderfy>
+
+                {markerClicked ? (
+                    <InfoWindow 
                         position={{
-                            lat: device.location.value.coordinates[1],
-                            lng: device.location.value.coordinates[0],
+                            lat: markerClicked.location.value.coordinates[1],
+                            lng: markerClicked.location.value.coordinates[0],
+                        }}
+                        onCloseClick={() => {
+                            setMarkerClicked(null);
                         }}
                     >
-                    </Marker>
-                ))}
+                        <div>
+                            marker here 
+                        </div>
+                    </InfoWindow>) : null
+                }
             </GoogleMap>
-        </div>
+        </LoadScript>
     );
 }
 

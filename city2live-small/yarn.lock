@@ -8078,6 +8078,11 @@
     "query-string" "^4.1.0"
     "sort-keys" "^1.0.0"
 
+"npm-overlapping-marker-spiderfier@^1.0.3":
+  "integrity" "sha1-QJnjZFzZNx3hUckkztQG25s9Sig="
+  "resolved" "https://registry.npmjs.org/npm-overlapping-marker-spiderfier/-/npm-overlapping-marker-spiderfier-1.0.3.tgz"
+  "version" "1.0.3"
+
 "npm-run-path@^2.0.0":
   "integrity" "sha1-NakjLfo11wZ7TLLd8jV7GHFTbF8="
   "resolved" "https://registry.npmjs.org/npm-run-path/-/npm-run-path-2.0.2.tgz"
